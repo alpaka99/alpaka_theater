@@ -11,13 +11,10 @@ final class TMDBManager {
     
     private init () { }
     
-    
-    func fetchTMDBData() {
-        let url = "https://api.themoviedb.org/3/trending/movie/day"
+    func fetchTMDBData(_ tmdbRequestType: TMDBRequestType) {
+        let url = tmdbRequestType.url
         
-        let parameters: Parameters = [
-            "language" : "en-US"
-        ]
+        let parameters: Parameters = tmdbRequestType.parameters
         
         let headers = TMDBAPIKey.headers
         
@@ -26,7 +23,7 @@ final class TMDBManager {
             parameters: parameters,
             headers: headers
         )
-        .responseString { response in
+        .responseDecodable(of: TMDBResponse.self) { response in
             switch response.result {
             case .success(let value):
                 dump(value)

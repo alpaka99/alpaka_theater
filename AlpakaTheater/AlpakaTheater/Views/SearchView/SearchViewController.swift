@@ -8,7 +8,8 @@
 import UIKit
 
 final class SearchViewController: BaseViewController {
-    let searchView = SearchView()
+    private let searchView = SearchView()
+    
     
     override func loadView() {
         self.view = searchView
@@ -25,7 +26,11 @@ final class SearchViewController: BaseViewController {
 
 
 extension SearchViewController: UISearchBarDelegate {
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            TMDBManager.shared.fetchTMDBData(.searchMovie(text))
+        }
+    }
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {

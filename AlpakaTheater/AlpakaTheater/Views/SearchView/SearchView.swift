@@ -34,10 +34,4 @@ final class SearchView: BaseView {
             $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
-    
-    override func configureUI() {
-        super.configureUI()
-        
-        collectionView.backgroundColor = .systemOrange
-    }
 }

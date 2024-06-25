@@ -43,6 +43,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     internal func setImage(_ image: UIImage) {
         activityIndicatorView.alpha = 0
+        activityIndicatorView.stopAnimating()
         
         posterImageView.alpha = 1
         posterImageView.image = image

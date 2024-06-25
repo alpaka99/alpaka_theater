@@ -1,5 +1,5 @@
 //
-//  BaseView.swift
+//  BaseCollectionViewCell.swift
 //  AlpakaTheater
 //
 //  Created by user on 6/25/24.
@@ -7,7 +7,10 @@
 
 import UIKit
 
-class BaseView: UIView, CodeBaseBuildable {
+import SnapKit
+
+class BaseCollectionViewCell: UICollectionViewCell, CodeBaseBuildable {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -16,20 +19,13 @@ class BaseView: UIView, CodeBaseBuildable {
         configureUI()
     }
     
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarchy() {
-        
-    }
+    internal func configureHierarchy() { }
     
-    func configureLayout() {
-        
-    }
+    internal func configureLayout() { }
     
-    func configureUI() {
-        
-    }
+    internal func configureUI() { }
 }

@@ -7,13 +7,14 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, CodeBaseBuildable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureHierarchy()
         configureLayout()
         configureUI()
+        configureDelegate()
     }
     
     internal func configureHierarchy() {
@@ -26,5 +27,9 @@ class BaseViewController: UIViewController {
     
     internal func configureUI() {
         view.backgroundColor = .white
+    }
+    
+    internal func configureDelegate() {
+        
     }
 }

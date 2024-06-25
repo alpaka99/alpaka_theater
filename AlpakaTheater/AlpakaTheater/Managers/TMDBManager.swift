@@ -4,20 +4,20 @@
 //
 //  Created by user on 6/25/24.
 //
+import UIKit
+
 import Alamofire
+import Kingfisher
 
 final class TMDBManager {
     static let shared = TMDBManager()
     
     private init () { }
     
-    
-    func fetchTMDBData() {
-        let url = "https://api.themoviedb.org/3/trending/movie/day"
+    func fetchTMDBData(_ tmdbRequestType: TMDBRequestType, completionHandler: @escaping (TMDBResponse) -> ()) {
+        let url = tmdbRequestType.url
         
-        let parameters: Parameters = [
-            "language" : "en-US"
-        ]
+        let parameters: Parameters = tmdbRequestType.parameters
         
         let headers = TMDBAPIKey.headers
         
@@ -26,13 +26,26 @@ final class TMDBManager {
             parameters: parameters,
             headers: headers
         )
-        .responseString { response in
+        .responseDecodable(of: TMDBResponse.self) { response in
             switch response.result {
             case .success(let value):
-                dump(value)
+                completionHandler(value)
             case .failure(let error):
                 print("ERROR")
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchImage(_ imageURL: String, completionHandler: @escaping (UIImage) -> ()) {
+        if let url = URL(string: TMDBAPIKey.imageURLPrefix + imageURL) {
+            KingfisherManager.shared.retrieveImage(with: url) { kingFisherResponse in
+                switch kingFisherResponse {
+                case .success(let retrieveImageResult):
+                    completionHandler(retrieveImageResult.image)
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
     }

@@ -33,6 +33,7 @@
 		CE82E0892C2B13DF00937DC7 /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E0882C2B13DF00937DC7 /* SearchDetailView.swift */; };
 		CE82E08B2C2B181700937DC7 /* SearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E08A2C2B181700937DC7 /* SearchDetailTableViewCell.swift */; };
 		CE82E08D2C2B183200937DC7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E08C2C2B183200937DC7 /* BaseTableViewCell.swift */; };
+		CE82E08F2C2B40D400937DC7 /* SearchDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E08E2C2B40D400937DC7 /* SearchDetailCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		CE82E0882C2B13DF00937DC7 /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
 		CE82E08A2C2B181700937DC7 /* SearchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewCell.swift; sourceTree = "<group>"; };
 		CE82E08C2C2B183200937DC7 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		CE82E08E2C2B40D400937DC7 /* SearchDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 				CE82E0862C2B139500937DC7 /* SearchDetailViewController.swift */,
 				CE82E0882C2B13DF00937DC7 /* SearchDetailView.swift */,
 				CE82E08A2C2B181700937DC7 /* SearchDetailTableViewCell.swift */,
+				CE82E08E2C2B40D400937DC7 /* SearchDetailCollectionViewCell.swift */,
 			);
 			path = SearchDetailView;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE82E08F2C2B40D400937DC7 /* SearchDetailCollectionViewCell.swift in Sources */,
 				CE82E0782C2ABD9E00937DC7 /* UICollectionViewLayout+Extension.swift in Sources */,
 				CE82E0872C2B139500937DC7 /* SearchDetailViewController.swift in Sources */,
 				CE82E06F2C2AB73800937DC7 /* SearchView.swift in Sources */,

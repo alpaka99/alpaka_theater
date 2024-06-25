@@ -42,5 +42,6 @@ final class SearchDetailTableViewCell: BaseTableViewCell {
         
         collectionView.backgroundColor = .systemBlue
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifier)
+        collectionView.register(SearchDetailCollectionViewCell.self, forCellWithReuseIdentifier: SearchDetailCollectionViewCell.identifier)
     }
 }

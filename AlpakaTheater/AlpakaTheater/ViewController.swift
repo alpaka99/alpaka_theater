@@ -14,6 +14,7 @@ class ViewController: BaseViewController {
         super.configureUI()
         
         navigationItem.title = "ViewController"
+        TMDBManager.shared.fetchTMDBData()
     }
 }
 

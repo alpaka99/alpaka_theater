@@ -27,10 +27,24 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     override func configureUI() {
         activityIndicatorView.startAnimating()
-        backgroundColor = .systemBlue
+    }
+    
+    override func layoutSubviews() {
+        posterImageView.layer.cornerRadius = 8
+        posterImageView.clipsToBounds = true
+    }
+    
+    internal func loadingImage() {
+        activityIndicatorView.alpha = 1
+        activityIndicatorView.startAnimating()
+        
+        posterImageView.alpha = 0
     }
     
     internal func setImage(_ image: UIImage) {
+        activityIndicatorView.alpha = 0
+        
+        posterImageView.alpha = 1
         posterImageView.image = image
     }
 }

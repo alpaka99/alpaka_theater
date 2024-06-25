@@ -53,6 +53,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
         
+        cell.loadingImage()
+        
         let data = searchResults[indexPath.row]
         if let posterPath = data.poster_path {
             TMDBManager.shared.fetchImage(posterPath) { image in

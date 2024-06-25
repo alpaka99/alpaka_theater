@@ -7,9 +7,15 @@
 
 import UIKit
 
+import Kingfisher
+
 final class SearchViewController: BaseViewController {
     private let searchView = SearchView()
-    
+    private var searchResults: [MovieData] = [] {
+        didSet {
+            searchView.collectionView.reloadData()
+        }
+    }
     
     override func loadView() {
         self.view = searchView
@@ -21,6 +27,7 @@ final class SearchViewController: BaseViewController {
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
         searchView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifier)
+        searchView.collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
     }
 }
 
@@ -28,20 +35,31 @@ final class SearchViewController: BaseViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
-            TMDBManager.shared.fetchTMDBData(.searchMovie(text))
+            TMDBManager.shared.fetchTMDBData(.searchMovie(text)) { [weak self] tmdbResponse in
+                self?.searchResults = tmdbResponse.results.filter {
+                    $0.poster_path != nil
+                }
+            }
         }
     }
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return searchResults.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.identifier, for: indexPath) as UICollectionViewCell
-        cell.backgroundColor = .systemBlue
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
+        
+        let data = searchResults[indexPath.row]
+        if let posterPath = data.poster_path {
+            TMDBManager.shared.fetchImage(posterPath) { image in
+                print(type(of: image))
+                cell.setImage(image)
+            }
+        }
         return cell
     }
 }

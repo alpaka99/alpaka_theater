@@ -13,10 +13,9 @@ struct TMDBResponse: Codable {
 }
 
 struct MovieData: Codable {
-    let backdrop_path: String
+    let backdrop_path: String?
     let genre_ids: [Int]
-    let original_language: String
     let original_title: String
     let overview: String
-    let poster_path: String
+    let poster_path: String?
 }

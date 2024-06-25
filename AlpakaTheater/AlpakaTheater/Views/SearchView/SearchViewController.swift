@@ -58,7 +58,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let data = searchResults[indexPath.row]
         if let posterPath = data.poster_path {
             TMDBManager.shared.fetchImage(posterPath) { image in
-                print(type(of: image))
                 cell.setImage(image)
             }
         }

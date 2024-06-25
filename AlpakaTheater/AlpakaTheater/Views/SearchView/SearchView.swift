@@ -10,8 +10,8 @@ import UIKit
 import SnapKit
 
 final class SearchView: BaseView {
-    private let searchBar = UISearchBar()
-    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private(set) var searchBar = UISearchBar()
+    private(set) lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.flowLayout(spacing: 10, numberOfCells: 3, heightMultiplier: 1.3))
     
     override func configureHierarchy() {
         super.configureHierarchy()

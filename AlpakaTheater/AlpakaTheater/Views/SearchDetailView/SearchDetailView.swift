@@ -36,14 +36,11 @@ final class SearchDetailView: BaseView {
     
     override func configureUI() {
         super.configureUI()
-        movieTitleLabel.text = "test title"
         movieTitleLabel.font = .systemFont(ofSize: 32, weight: .semibold)
-        
         
         tableView.register(
             SearchDetailTableViewCell.self,
             forCellReuseIdentifier: SearchDetailTableViewCell.identifier
         )
-        tableView.backgroundColor = .systemOrange
     }
 }

@@ -38,9 +38,6 @@ final class SearchDetailTableViewCell: BaseTableViewCell {
     }
     
     override func configureUI() {
-        tableViewCellTitle.text = "테스트 타이틀"
-        
-        collectionView.backgroundColor = .systemBlue
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifier)
         collectionView.register(SearchDetailCollectionViewCell.self, forCellWithReuseIdentifier: SearchDetailCollectionViewCell.identifier)
     }

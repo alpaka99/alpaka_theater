@@ -11,11 +11,12 @@ import Kingfisher
 
 final class SearchDetailViewController: BaseViewController {
     private let searchDetailView = SearchDetailView()
-    private var movie = MovieData(backdrop_path: "", id: 0, genre_ids: [], original_title: "", overview: "", poster_path: "")
+    private var movie = MovieData(title: "", backdrop_path: "", id: 0, genre_ids: [], original_title: "", overview: "", poster_path: "")
     private var results: [[MovieData]] = [
         [],
         []
     ]
+    let dispatchGroup = DispatchGroup()
     
     override func loadView() {
         view = searchDetailView
@@ -28,28 +29,32 @@ final class SearchDetailViewController: BaseViewController {
         searchDetailView.tableView.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         fetchData()
     }
     
-    func fetchData() {
-        TMDBManager.shared.fetchTMDBData(.similarMovies(123)) {[weak self] tmdbResponse in
+    private func fetchData() {
+        TMDBManager.shared.fetchTMDBData(.similarMovies(movie.id)) {[weak self] tmdbResponse in
             self?.results[0] = tmdbResponse.results.filter {
                 $0.poster_path != nil
             }
             self?.searchDetailView.tableView.reloadData()
-            print(self?.results[0].count)
         }
         
-        TMDBManager.shared.fetchTMDBData(.recommendations(123)) {[weak self] tmdbResponse in
+        TMDBManager.shared.fetchTMDBData(.recommendations(movie.id)) {[weak self] tmdbResponse in
             self?.results[1] = tmdbResponse.results.filter {
                 $0.poster_path != nil
             }
             self?.searchDetailView.tableView.reloadData()
-            print(self?.results[1].count)
         }
+    }
+    
+    internal func configureData(_ movie: MovieData) {
+        self.movie = movie
+        
+        searchDetailView.movieTitleLabel.text = movie.title
     }
 }
 
@@ -62,12 +67,16 @@ extension SearchDetailViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchDetailTableViewCell.identifier, for: indexPath) as? SearchDetailTableViewCell else {
             return UITableViewCell()
         }
+        if indexPath.row == 0 {
+            cell.tableViewCellTitle.text = "비슷한 영화"
+        } else if indexPath.row == 1 {
+            cell.tableViewCellTitle.text = "추천 영화"
+        }
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         cell.collectionView.tag = indexPath.row
         
         cell.collectionView.reloadData()
-        cell.backgroundColor = .systemMint
         
         return cell
     }
@@ -86,14 +95,20 @@ extension SearchDetailViewController: UICollectionViewDelegate, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchDetailCollectionViewCell.identifier, for: indexPath) as? SearchDetailCollectionViewCell else { return UICollectionViewCell() }
         
         let data = results[collectionView.tag][indexPath.row]
+        cell.loadImage()
         
         if let posterPath = data.poster_path {
-            TMDBManager.shared.fetchImage(posterPath) { image in
-                cell.posterImageView.image =  image
+            dispatchGroup.enter()
+            DispatchQueue.global(qos: .userInteractive).async(group: dispatchGroup) {
+                TMDBManager.shared.fetchImage(posterPath) { [weak self] image in
+                    self?.dispatchGroup.leave()
+                    
+                    self?.dispatchGroup.notify(queue: .main) {
+                        cell.setImage(image)
+                    }
+                }
             }
         }
-//          
-        cell.backgroundColor = .systemIndigo
         return cell
     }
     

@@ -34,7 +34,7 @@ enum TMDBRequestType: Hashable {
             parameters["language"] = "ko-KR"
             parameters["page"] = "1"
         case .similarMovies(_), .recommendations(_):
-            parameters["language"] = "en-US"
+            parameters["language"] = "ko-KR"
             parameters["page"] = "1"
         }
         

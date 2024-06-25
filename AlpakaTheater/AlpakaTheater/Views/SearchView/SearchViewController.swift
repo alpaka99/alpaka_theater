@@ -63,4 +63,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = searchResults[indexPath.row]
+        let searchDetailViewController = SearchDetailViewController()
+        searchDetailViewController.configureData(data)
+        
+        navigationController?.pushViewController(searchDetailViewController, animated: true)
+    }
 }

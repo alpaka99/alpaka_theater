@@ -21,6 +21,7 @@
 		CE82E0692C2AB27A00937DC7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE82E0682C2AB27A00937DC7 /* SnapKit */; };
 		CE82E06D2C2AB72100937DC7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E06C2C2AB72100937DC7 /* SearchViewController.swift */; };
 		CE82E06F2C2AB73800937DC7 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E06E2C2AB73800937DC7 /* SearchView.swift */; };
+		CE82E0722C2AB9AB00937DC7 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E0712C2AB9AB00937DC7 /* Reusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		CE82E05F2C2AB1F100937DC7 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CE82E06C2C2AB72100937DC7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CE82E06E2C2AB73800937DC7 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		CE82E0712C2AB9AB00937DC7 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		CE82E03C2C2AAC0A00937DC7 /* AlpakaTheater */ = {
 			isa = PBXGroup;
 			children = (
+				CE82E0702C2AB9A200937DC7 /* Protocols */,
 				CE82E06A2C2AB6E100937DC7 /* Views */,
 				CE82E05D2C2AB1E100937DC7 /* Resources */,
 				CE82E05A2C2AB1B500937DC7 /* Managers */,
@@ -134,6 +137,14 @@
 				CE82E06E2C2AB73800937DC7 /* SearchView.swift */,
 			);
 			path = SearchView;
+			sourceTree = "<group>";
+		};
+		CE82E0702C2AB9A200937DC7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CE82E0712C2AB9AB00937DC7 /* Reusable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 				CE82E06F2C2AB73800937DC7 /* SearchView.swift in Sources */,
 				CE82E0602C2AB1F100937DC7 /* APIKey.swift in Sources */,
 				CE82E06D2C2AB72100937DC7 /* SearchViewController.swift in Sources */,
+				CE82E0722C2AB9AB00937DC7 /* Reusable.swift in Sources */,
 				CE82E0572C2AAD2400937DC7 /* BaseViewController.swift in Sources */,
 				CE82E0592C2AAD8E00937DC7 /* BaseView.swift in Sources */,
 				CE82E03E2C2AAC0A00937DC7 /* AppDelegate.swift in Sources */,

@@ -15,6 +15,8 @@
 		CE82E0522C2AAC1E00937DC7 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = CE82E0512C2AAC1E00937DC7 /* .gitIgnore */; };
 		CE82E0572C2AAD2400937DC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E0562C2AAD2400937DC7 /* BaseViewController.swift */; };
 		CE82E0592C2AAD8E00937DC7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E0582C2AAD8E00937DC7 /* BaseView.swift */; };
+		CE82E05C2C2AB1C200937DC7 /* TMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E05B2C2AB1C200937DC7 /* TMDBManager.swift */; };
+		CE82E0602C2AB1F100937DC7 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82E05F2C2AB1F100937DC7 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		CE82E0512C2AAC1E00937DC7 /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
 		CE82E0562C2AAD2400937DC7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CE82E0582C2AAD8E00937DC7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		CE82E05B2C2AB1C200937DC7 /* TMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBManager.swift; sourceTree = "<group>"; };
+		CE82E05F2C2AB1F100937DC7 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 		CE82E03C2C2AAC0A00937DC7 /* AlpakaTheater */ = {
 			isa = PBXGroup;
 			children = (
+				CE82E05D2C2AB1E100937DC7 /* Resources */,
+				CE82E05A2C2AB1B500937DC7 /* Managers */,
 				CE82E0532C2AAD0F00937DC7 /* Base */,
 				CE82E03D2C2AAC0A00937DC7 /* AppDelegate.swift */,
 				CE82E03F2C2AAC0A00937DC7 /* SceneDelegate.swift */,
@@ -79,6 +85,30 @@
 				CE82E0582C2AAD8E00937DC7 /* BaseView.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		CE82E05A2C2AB1B500937DC7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CE82E05B2C2AB1C200937DC7 /* TMDBManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		CE82E05D2C2AB1E100937DC7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE82E05E2C2AB1E900937DC7 /* APIKey */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CE82E05E2C2AB1E900937DC7 /* APIKey */ = {
+			isa = PBXGroup;
+			children = (
+				CE82E05F2C2AB1F100937DC7 /* APIKey.swift */,
+			);
+			path = APIKey;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,9 +183,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE82E0422C2AAC0A00937DC7 /* ViewController.swift in Sources */,
+				CE82E0602C2AB1F100937DC7 /* APIKey.swift in Sources */,
 				CE82E0572C2AAD2400937DC7 /* BaseViewController.swift in Sources */,
 				CE82E0592C2AAD8E00937DC7 /* BaseView.swift in Sources */,
 				CE82E03E2C2AAC0A00937DC7 /* AppDelegate.swift in Sources */,
+				CE82E05C2C2AB1C200937DC7 /* TMDBManager.swift in Sources */,
 				CE82E0402C2AAC0A00937DC7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

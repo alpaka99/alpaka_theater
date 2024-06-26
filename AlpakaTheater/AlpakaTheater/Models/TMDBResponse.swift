@@ -11,13 +11,3 @@ struct TMDBResponse: Codable {
     let total_pages: Int
     let total_results: Int
 }
-
-struct MovieData: Codable {
-    let title: String
-    let backdrop_path: String?
-    let id: Int
-    let genre_ids: [Int]
-    let original_title: String
-    let overview: String
-    let poster_path: String?
-}

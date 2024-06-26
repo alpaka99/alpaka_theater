@@ -35,7 +35,10 @@ final class SearchViewController: BaseViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
-            TMDBManager.shared.fetchTMDBData(.searchMovie(text)) { [weak self] tmdbResponse in
+            TMDBManager.shared.fetchTMDBData(
+                .searchMovie(text),
+                TMDBResponse.self
+            ) { [weak self] tmdbResponse in
                 self?.searchResults = tmdbResponse.results.filter {
                     $0.poster_path != nil
                 }
@@ -48,7 +51,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchResults.count
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }

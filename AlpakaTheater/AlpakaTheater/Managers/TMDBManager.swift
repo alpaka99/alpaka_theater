@@ -14,19 +14,17 @@ final class TMDBManager {
     
     private init () { }
     
-    func fetchTMDBData(_ tmdbRequestType: TMDBRequestType, completionHandler: @escaping (TMDBResponse) -> ()) {
-        let url = tmdbRequestType.url
-        
-        let parameters: Parameters = tmdbRequestType.parameters
-        
-        let headers = TMDBAPIKey.headers
-        
+    func fetchTMDBData<T: Codable>(
+        _ tmdbRequestType: TMDBRequestType,
+        _ type: T.Type,
+        completionHandler: @escaping (T) -> ()
+    ) { 
         AF.request(
-            url,
-            parameters: parameters,
-            headers: headers
+            tmdbRequestType.baseUrl,
+            parameters: tmdbRequestType.parameters,
+            headers: TMDBAPIKey.headers
         )
-        .responseDecodable(of: TMDBResponse.self) { response in
+        .responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let value):
                 completionHandler(value)

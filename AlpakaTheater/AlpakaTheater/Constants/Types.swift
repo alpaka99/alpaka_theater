@@ -11,9 +11,10 @@ enum TMDBRequestType: Hashable {
     case searchMovie(String)
     case similarMovies(Int)
     case recommendations(Int)
+    case images(Int)
     
     
-    var url: String {
+    var baseUrl: String {
         switch self {
         case .searchMovie(_):
             return "https://api.themoviedb.org/3/search/movie"
@@ -21,6 +22,8 @@ enum TMDBRequestType: Hashable {
             return "https://api.themoviedb.org/3/movie/\(movieId)/similar"
         case .recommendations(let movieId):
             return "https://api.themoviedb.org/3/movie/\(movieId)/recommendations"
+        case .images(let movieId):
+            return  "https://api.themoviedb.org/3/movie/\(movieId)/images"
         }
     }
     
@@ -36,8 +39,9 @@ enum TMDBRequestType: Hashable {
         case .similarMovies(_), .recommendations(_):
             parameters["language"] = "ko-KR"
             parameters["page"] = "1"
+        case .images(_):
+            break
         }
-        
         return parameters
     }
 }

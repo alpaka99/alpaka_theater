@@ -11,8 +11,9 @@ import Kingfisher
 
 final class SearchDetailViewController: BaseViewController {
     private let searchDetailView = SearchDetailView()
-    private var movie = MovieData(title: "", backdrop_path: "", id: 0, genre_ids: [], original_title: "", overview: "", poster_path: "")
-    private var results: [[MovieData]] = [
+    private var searchedMovie = MovieData(title: "", backdrop_path: "", id: 0, genre_ids: [], overview: "", poster_path: "")
+    private var results: [[String]] = [
+        [],
         [],
         []
     ]
@@ -36,23 +37,49 @@ final class SearchDetailViewController: BaseViewController {
     }
     
     private func fetchData() {
-        TMDBManager.shared.fetchTMDBData(.similarMovies(movie.id)) {[weak self] tmdbResponse in
-            self?.results[0] = tmdbResponse.results.filter {
-                $0.poster_path != nil
-            }
+        TMDBManager.shared.fetchTMDBData(
+            .similarMovies(searchedMovie.id),
+            TMDBResponse.self)
+        {[weak self] tmdbResponse in
+            self?.results[0] = tmdbResponse.results
+                .map {
+                    return $0.poster_path ?? ""
+                }
+                .filter {
+                    $0 != ""
+                }
+            
             self?.searchDetailView.tableView.reloadData()
         }
         
-        TMDBManager.shared.fetchTMDBData(.recommendations(movie.id)) {[weak self] tmdbResponse in
-            self?.results[1] = tmdbResponse.results.filter {
-                $0.poster_path != nil
+        TMDBManager.shared.fetchTMDBData(
+            .recommendations(searchedMovie.id),
+            TMDBResponse.self
+        ) {[weak self] tmdbResponse in
+            self?.results[1] = tmdbResponse.results
+                .map {
+                    return $0.poster_path ?? ""
+                }
+                .filter {
+                    $0 != ""
+                }
+            self?.searchDetailView.tableView.reloadData()
+        }
+        
+        
+        TMDBManager.shared.fetchTMDBData(
+            .images(searchedMovie.id),
+            ImageSearchResponse.self
+        ) {[weak self] imageSearchResponse in
+            self?.results[2] = imageSearchResponse.backdrops.map {
+                $0.file_path
             }
             self?.searchDetailView.tableView.reloadData()
         }
     }
     
     internal func configureData(_ movie: MovieData) {
-        self.movie = movie
+        self.searchedMovie = movie
         
         searchDetailView.movieTitleLabel.text = movie.title
     }
@@ -71,6 +98,8 @@ extension SearchDetailViewController: UITableViewDelegate, UITableViewDataSource
             cell.tableViewCellTitle.text = "비슷한 영화"
         } else if indexPath.row == 1 {
             cell.tableViewCellTitle.text = "추천 영화"
+        } else if indexPath.row == 2 {
+            cell.tableViewCellTitle.text = "영화 포스터"
         }
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
@@ -97,18 +126,17 @@ extension SearchDetailViewController: UICollectionViewDelegate, UICollectionView
         let data = results[collectionView.tag][indexPath.row]
         cell.loadImage()
         
-        if let posterPath = data.poster_path {
-            dispatchGroup.enter()
-            DispatchQueue.global(qos: .userInteractive).async(group: dispatchGroup) {
-                TMDBManager.shared.fetchImage(posterPath) { [weak self] image in
-                    self?.dispatchGroup.leave()
-                    
-                    self?.dispatchGroup.notify(queue: .main) {
-                        cell.setImage(image)
-                    }
+        dispatchGroup.enter()
+        DispatchQueue.global(qos: .userInteractive).async(group: dispatchGroup) {
+            TMDBManager.shared.fetchImage(data) { [weak self] image in
+                self?.dispatchGroup.leave()
+                
+                self?.dispatchGroup.notify(queue: .main) {
+                    cell.setImage(image)
                 }
             }
         }
+        
         return cell
     }
     

@@ -36,13 +36,6 @@ final class SearchDetailCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        posterImageView.layer.cornerRadius = 8
-        posterImageView.clipsToBounds = true
-    }
-    
     func setImage(_ image: UIImage) {
         activityIndicatorView.stopAnimating()
         activityIndicatorView.alpha = 0
@@ -56,5 +49,12 @@ final class SearchDetailCollectionViewCell: BaseCollectionViewCell {
         activityIndicatorView.startAnimating()
         
         posterImageView.alpha = 0
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        posterImageView.layer.cornerRadius = 8
+        posterImageView.clipsToBounds = true
     }
 }
